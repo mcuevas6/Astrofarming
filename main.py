@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import json
 
-# Configuration of the Streamlit page
+# Configuración de la página de Streamlit
 st.set_page_config(
     page_title="Astrofarming — Satellite Telemetry",
     page_icon="🛰️",
     layout="wide"
 )
 
-# Calibrated dataset of Magdalena Medio Valley (Santander, Colombia)
+# Dataset calibrado del Magdalena Medio Valley (Santander, Colombia)
 ASTROFARMING_RECORDS = [
     {
         "id": 1,
@@ -193,6 +193,7 @@ ASTROFARMING_RECORDS = [
     }
 ]
 
+df_astro = pd.DataFrame(ASTROFARMING_RECORDS)
 records_json = json.dumps(ASTROFARMING_RECORDS)
 
 astrofarming_ui = f"""
@@ -219,6 +220,9 @@ astrofarming_ui = f"""
     .af-modal {{ background:#111614; border:1px solid #2A3631; border-radius:16px; max-width:560px; width:100%; padding:22px; color:#F3F4F6; position:relative; max-height:92vh; overflow-y:auto; }}
     .af-bar-bg {{ height:7px; background:#0A0D0C; border-radius:999px; overflow:hidden; border:1px solid #1F2925; margin-top:4px; }}
     .af-bar-fill {{ height:100%; border-radius:999px; }}
+    .af-tooltip {{ position:relative; }}
+    .af-tooltip:hover .af-tip-box {{ opacity:1; transform:translateY(0); }}
+    .af-tip-box {{ opacity:0; transform:translateY(4px); transition:all .15s; pointer-events:none; position:absolute; bottom:105%; left:50%; transform:translateX(-50%); background:#0A0D0C; border:1px solid #2F3E38; padding:6px 10px; border-radius:8px; font-size:11px; white-space:nowrap; z-index:20; box-shadow:0 8px 20px rgba(0,0,0,0.6); }}
   </style>
 
   <!-- Header -->
@@ -282,7 +286,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#F59E0B; font-weight:700; letter-spacing:1px;">COPERNICUS LAND MONITORING SERVICE</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">1) Soil Seasonality &amp; Abundance</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">DMP 300m (0–210 Dry Matter Index)</div>
-          <img src="https://raw.githubusercontent.com/mcuevas6/Astroagricultura/main/activos/soil_dmp.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/soil_dmp.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> Evaluates 10-day dry matter productivity and soil moisture retention across Santander. Red-yellow gradients identify high drought stress and rapid mineralization on exposed alluvial soils.
           </p>
@@ -292,7 +296,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#38BDF8; font-weight:700; letter-spacing:1px;">ESA COPERNICUS SENTINEL-1 IW</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">2) Oil Palm Structural Mapping</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">C-Band SAR RGB Ratio (Backscatter)</div>
-          <img src="https://raw.githubusercontent.com/mcuevas6/Astroagricultura/main/activos/oil_palm.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/oil_palm.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> Utilizes all-weather C-band synthetic aperture radar (SAR) backscatter ratios (VV/VH). Distinct textural signatures separate perennial oil palm and rubber plantations from low-stature citrus blocks.
           </p>
@@ -302,7 +306,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#10B981; font-weight:700; letter-spacing:1px;">ESA COPERNICUS SENTINEL-2 L2A</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">3) Vegetation Index (NDVI)</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">Optical Chlorophyll Vigor (B8/B4)</div>
-          <img src="https://raw.githubusercontent.com/mcuevas6/Astroagricultura/main/activos/ndvi.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/ndvi.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> High-resolution multispectral optical imagery measuring near-infrared reflectance. Dark green pixels indicate dense photosynthetic canopies and robust chlorophyll absorption in the Magdalena river basin.
           </p>
@@ -398,14 +402,14 @@ astrofarming_ui = f"""
         <div style="display:flex; align-items:center; gap:10px; background:#0A0D0C; border:1px solid #222C28; border-radius:10px; padding:10px;">
           <svg width="48" height="48" viewBox="0 0 36 36" style="transform:rotate(-90deg);">
             <circle cx="18" cy="18" r="15.5" fill="none" stroke="#1E2723" stroke-width="3.5"/>
-            <circle id="g-y-arc" cx="18" cy="18" r="15.5" fill="none" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="97.4" stroke-dashoffset="97.4"/>
+            <circle id="g-y-arc" cx="18" cy="18" r="15.5" fill="none" stroke="#10B981" stroke-width="3.5" stroke-linecap="round"/>
           </svg>
           <div><div id="g-y-pct" style="font-size:16px; font-weight:700;"></div><div style="font-size:11px; color:#D1D5DB;">Yield</div><div id="g-y-sub" style="font-size:10px; color:#6B7280;"></div></div>
         </div>
         <div style="display:flex; align-items:center; gap:10px; background:#0A0D0C; border:1px solid #222C28; border-radius:10px; padding:10px;">
           <svg width="48" height="48" viewBox="0 0 36 36" style="transform:rotate(-90deg);">
             <circle cx="18" cy="18" r="15.5" fill="none" stroke="#1E2723" stroke-width="3.5"/>
-            <circle id="g-h-arc" cx="18" cy="18" r="15.5" fill="none" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="97.4" stroke-dashoffset="97.4"/>
+            <circle id="g-h-arc" cx="18" cy="18" r="15.5" fill="none" stroke="#10B981" stroke-width="3.5" stroke-linecap="round"/>
           </svg>
           <div><div id="g-h-pct" style="font-size:16px; font-weight:700;"></div><div style="font-size:11px; color:#D1D5DB;">Soil health</div><div id="g-h-sub" style="font-size:10px; color:#6B7280;"></div></div>
         </div>
@@ -420,150 +424,4 @@ astrofarming_ui = f"""
 
     function afSwitchTab(t) {{
       ['home','advisor','analytics'].forEach(k => {{
-        document.getElementById('af-view-'+k).style.display = (k===t) ? 'block' : 'none';
-        document.getElementById('tab-'+k).className = (k===t) ? 'af-tab active' : 'af-tab';
-      }});
-      if(t==='advisor') afRenderAdvisor();
-      if(t==='analytics') afRenderAnalytics();
-    }}
-
-    function afSetTelemetry(season) {{
-      const d = AF_DATA.find(x => x.Climate_Season === season);
-      if(!d) return;
-      document.getElementById('af-home-season').textContent = d.Climate_Season;
-      document.getElementById('af-home-diag').textContent = d.NASA_POWER_Diagnostic;
-      document.getElementById('af-t-rain').textContent = '💧 ' + d.Precipitation_PRECTOTCORR_mm_month + ' mm/mo';
-      document.getElementById('af-t-wet').textContent = '🌱 ' + d.Soil_Wetness_GWETTOP_pct.toFixed(1) + '%';
-      document.getElementById('af-t-temp').textContent = '🌡️ ' + d.Air_Temp_T2M_C.toFixed(1) + ' °C';
-      document.getElementById('af-t-solar').textContent = '☀️ ' + d.Solar_Irradiance_MJ_m2_day.toFixed(1) + ' MJ/m²/d';
-      ['hbtn-dry','hbtn-wet','hbtn-trans'].forEach(id => document.getElementById(id).classList.remove('active'));
-      const act = season.startsWith('Dry') ? 'hbtn-dry' : season.startsWith('Wet') ? 'hbtn-wet' : 'hbtn-trans';
-      document.getElementById(act).classList.add('active');
-    }}
-
-    function afBadgeClass(shortSeason) {{
-      if(shortSeason==='Dry Season') return 'af-badge-amber';
-      if(shortSeason==='Wet Season') return 'af-badge-sky';
-      return 'af-badge-green';
-    }}
-
-    function afRenderAdvisor() {{
-      const seasons = ['All','Dry Season','Wet Season','Transition Season'];
-      const priorities = ['All','Maximize short-term yield','Restore soil nutrients','Save water (Drought protection)','Prevent erosion and runoff'];
-      document.getElementById('af-season-pills').innerHTML = seasons.map(s => `<button class="af-pill ${{afSeason===s?'active':''}}" onclick="afSeason='${{s}}';afRenderAdvisor()">${{s}}</button>`).join('');
-      document.getElementById('af-priority-pills').innerHTML = priorities.map(p => `<button class="af-pill ${{afPriority===p?'active':''}}" onclick="afPriority='${{p}}';afRenderAdvisor()">${{p}}</button>`).join('');
-
-      const list = AF_DATA.filter(x => (afSeason==='All'||x.Short_Season===afSeason) && (afPriority==='All'||x.Farmer_Priority===afPriority));
-      document.getElementById('af-cards-container').innerHTML = list.map(x => `
-        <div class="af-card" style="cursor:pointer; display:flex; flex-direction:column; justify-content:space-between;" onclick="afOpenModal(${{x.id}})">
-          <div>
-            <span class="${{afBadgeClass(x.Short_Season)}}">${{x.Climate_Season}}</span>
-            <h4 style="font-size:17px; font-weight:700; color:#FFFFFF; margin:10px 0 8px 0;">${{x.Rotation_Strategy}}</h4>
-            <div style="font-size:10px; color:#6B7280; font-weight:700;">CROP SEQUENCE</div>
-            <div style="font-size:13px; color:#E5E7EB; font-weight:500; margin-top:2px;">${{x.Crop_Sequence}}</div>
-          </div>
-          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px; padding-top:12px; border-top:1px solid #222C28;">
-            <div><div style="font-size:10px; color:#6B7280;">SOIL WET.</div><div style="font-size:13px; font-weight:700;">${{x.Soil_Wetness_GWETTOP_pct}}%</div></div>
-            <div><div style="font-size:10px; color:#6B7280;">PRECIP.</div><div style="font-size:13px; font-weight:700;">${{x.Precipitation_PRECTOTCORR_mm_month}} mm</div></div>
-            <div><div style="font-size:10px; color:#6B7280;">AIR TEMP</div><div style="font-size:13px; font-weight:700;">${{x.Air_Temp_T2M_C}} °C</div></div>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding-top:10px; border-top:1px solid #222C28; font-size:12px;">
-            <span style="color:#9CA3AF;">${{x.Farmer_Priority}}</span>
-            <span style="color:#10B981; font-weight:700;">Details &gt;</span>
-          </div>
-        </div>
-      `).join('');
-    }}
-
-    function afOpenModal(id) {{
-      const x = AF_DATA.find(d => d.id === id); 
-      if(!x) return;
-      const sb = document.getElementById('m-season'); 
-      sb.textContent = x.Climate_Season; 
-      sb.className = afBadgeClass(x.Short_Season);
-
-      document.getElementById('m-priority').textContent = x.Farmer_Priority;
-      document.getElementById('m-strategy').textContent = x.Rotation_Strategy;
-      document.getElementById('m-crops').textContent = x.Crop_Sequence;
-      document.getElementById('m-rec').textContent = x.Actionable_Recommendation;
-      document.getElementById('m-soil').textContent = x.Dominant_Soil_Type;
-      document.getElementById('m-solar').textContent = x.Solar_Irradiance_MJ_m2_day + ' MJ/m²/d';
-
-      document.getElementById('m-w-val').textContent = x.Water_Consumption_m3_ha + ' m³/ha';
-      document.getElementById('m-w-bar').style.width = Math.min(100, (x.Water_Consumption_m3_ha / 6000) * 100) + '%';
-
-      document.getElementById('m-n-val').textContent = x.Nitrogen_Input_kg_ha + ' kg/ha';
-      document.getElementById('m-n-bar').style.width = Math.min(100, (x.Nitrogen_Input_kg_ha / 100) * 100) + '%';
-
-      document.getElementById('m-y-val').textContent = x.Yield_Index_0_100 + ' / 100';
-      document.getElementById('m-y-bar').style.width = x.Yield_Index_0_100 + '%';
-
-      document.getElementById('m-h-val').textContent = x.Soil_Health_Score_0_100 + ' / 100';
-      const hBar = document.getElementById('m-h-bar');
-      hBar.style.width = x.Soil_Health_Score_0_100 + '%';
-      hBar.style.background = x.Soil_Health_Score_0_100 > 75 ? '#10B981' : x.Soil_Health_Score_0_100 > 50 ? '#FBBF24' : '#EF4444';
-
-      document.getElementById('g-y-pct').textContent = x.Yield_Index_0_100 + '%';
-      document.getElementById('g-y-sub').textContent = 'Index';
-      const yCirc = 2 * Math.PI * 15.5;
-      document.getElementById('g-y-arc').style.strokeDasharray = yCirc;
-      document.getElementById('g-y-arc').style.strokeDashoffset = yCirc - (yCirc * x.Yield_Index_0_100 / 100);
-
-      document.getElementById('g-h-pct').textContent = x.Soil_Health_Score_0_100 + '%';
-      document.getElementById('g-h-sub').textContent = 'Score';
-      document.getElementById('g-h-arc').style.strokeDasharray = yCirc;
-      document.getElementById('g-h-arc').style.strokeDashoffset = yCirc - (yCirc * x.Soil_Health_Score_0_100 / 100);
-
-      document.getElementById('af-modal-bg').style.display = 'flex';
-    }}
-
-    function afCloseModal() {{
-      document.getElementById('af-modal-bg').style.display = 'none';
-    }}
-
-    function afRenderAnalytics() {{
-      const strategies = [...new Set(AF_DATA.map(x => x.Rotation_Strategy))];
-      
-      const agg = strategies.map(strat => {{
-        const subset = AF_DATA.filter(x => x.Rotation_Strategy === strat);
-        const avgYield = subset.reduce((acc, curr) => acc + curr.Yield_Index_0_100, 0) / subset.length;
-        const avgSoil = subset.reduce((acc, curr) => acc + curr.Soil_Health_Score_0_100, 0) / subset.length;
-        const avgWater = subset.reduce((acc, curr) => acc + curr.Water_Consumption_m3_ha, 0) / subset.length;
-        return {{ strat, avgYield, avgSoil, avgWater }};
-      }});
-
-      document.getElementById('af-chart-yield').innerHTML = agg.map(item => `
-        <div style="margin-bottom:12px;">
-          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
-            <span style="color:#D1D5DB; font-weight:500;">${{item.strat}}</span>
-            <span style="color:#10B981; font-weight:700;">${{item.avgYield.toFixed(1)}}</span>
-          </div>
-          <div class="af-bar-bg"><div class="af-bar-fill" style="width:${{item.avgYield}}%; background:#10B981;"></div></div>
-        </div>
-      `).join('');
-
-      document.getElementById('af-chart-soil').innerHTML = agg.map(item => `
-        <div style="margin-bottom:12px;">
-          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
-            <span style="color:#D1D5DB; font-weight:500;">${{item.strat}}</span>
-            <span style="color:#34D399; font-weight:700;">${{item.avgSoil.toFixed(1)}}</span>
-          </div>
-          <div class="af-bar-bg"><div class="af-bar-fill" style="width:${{item.avgSoil}}%; background:#34D399;"></div></div>
-        </div>
-      `).join('');
-
-      document.getElementById('af-chart-water').innerHTML = agg.map(item => `
-        <div style="margin-bottom:12px;">
-          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
-            <span style="color:#D1D5DB; font-weight:500;">${{item.strat}}</span>
-            <span style="color:#38BDF8; font-weight:700;">${{item.avgWater.toFixed(0)}} m³/ha</span>
-          </div>
-          <div class="af-bar-bg"><div class="af-bar-fill" style="width:${{Math.min(100, (item.avgWater/6000)*100)}}%; background:#38BDF8;"></div></div>
-        </div>
-      `).join('');
-    }}
-  </script>
-</div>
-"""
-
-st.components.v1.html(astrofarming_ui, height=920, scrolling=True)
+        document.getElementById('af-view-'+k).style.display = (k===t) ? 'block' : 'none
