@@ -196,7 +196,6 @@ ASTROFARMING_RECORDS = [
 df_astro = pd.DataFrame(ASTROFARMING_RECORDS)
 records_json = json.dumps(ASTROFARMING_RECORDS)
 
-# Interfaz visual en HTML y JavaScript embebido para Streamlit
 astrofarming_ui = f"""
 <div id="astrofarming-root" style="font-family: 'Inter', system-ui, -apple-system, sans-serif; background:#0A0D0C; color:#F3F4F6; border-radius:16px; border:1px solid #222C28; overflow:hidden; margin:8px 0; box-shadow:0 20px 45px rgba(0,0,0,0.65);">
   <style>
@@ -287,7 +286,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#F59E0B; font-weight:700; letter-spacing:1px;">COPERNICUS LAND MONITORING SERVICE</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">1) Soil Seasonality &amp; Abundance</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">DMP 300m (0–210 Dry Matter Index)</div>
-          <img src="https://raw.githubusercontent.com/astrofarming/assets/main/1_soil_dmp.jpg" onerror="this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=80'" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/soil_dmp.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> Evaluates 10-day dry matter productivity and soil moisture retention across Santander. Red-yellow gradients identify high drought stress and rapid mineralization on exposed alluvial soils.
           </p>
@@ -297,7 +296,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#38BDF8; font-weight:700; letter-spacing:1px;">ESA COPERNICUS SENTINEL-1 IW</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">2) Oil Palm Structural Mapping</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">C-Band SAR RGB Ratio (Backscatter)</div>
-          <img src="https://raw.githubusercontent.com/astrofarming/assets/main/2_oil_palm.jpg" onerror="this.src='https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=600&auto=format&fit=crop&q=80'" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/oil_palm.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> Utilizes all-weather C-band synthetic aperture radar (SAR) backscatter ratios (VV/VH). Distinct textural signatures separate perennial oil palm and rubber plantations from low-stature citrus blocks.
           </p>
@@ -307,7 +306,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#10B981; font-weight:700; letter-spacing:1px;">ESA COPERNICUS SENTINEL-2 L2A</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">3) Vegetation Index (NDVI)</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">Optical Chlorophyll Vigor (B8/B4)</div>
-          <img src="https://raw.githubusercontent.com/astrofarming/assets/main/3_ndvi.jpg" onerror="this.src='https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600&auto=format&fit=crop&q=80'" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/ndvi.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> High-resolution multispectral optical imagery measuring near-infrared reflectance. Dark green pixels indicate dense photosynthetic canopies and robust chlorophyll absorption in the Magdalena river basin.
           </p>
