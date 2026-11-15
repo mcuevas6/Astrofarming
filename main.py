@@ -196,33 +196,33 @@ ASTROFARMING_RECORDS = [
 df_astro = pd.DataFrame(ASTROFARMING_RECORDS)
 records_json = json.dumps(ASTROFARMING_RECORDS)
 
-astrofarming_ui = f"""
+astrofarming_ui = """
 <div id="astrofarming-root" style="font-family: 'Inter', system-ui, -apple-system, sans-serif; background:#0A0D0C; color:#F3F4F6; border-radius:16px; border:1px solid #222C28; overflow:hidden; margin:8px 0; box-shadow:0 20px 45px rgba(0,0,0,0.65);">
   <style>
-    #astrofarming-root * {{ box-sizing: border-box; }}
-    .af-header {{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; padding:14px 24px; background:#0E1311; border-bottom:1px solid #222C28; gap:12px; }}
-    .af-brand {{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; color:#FFFFFF; }}
-    .af-logo {{ width:30px; height:30px; border-radius:8px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.45); display:flex; align-items:center; justify-content:center; color:#10B981; font-size:15px; }}
-    .af-nav {{ display:flex; gap:6px; flex-wrap:wrap; }}
-    .af-tab {{ padding:7px 14px; border-radius:8px; font-size:13px; font-weight:500; cursor:pointer; border:1px solid transparent; background:transparent; color:#9CA3AF; transition:all .15s; }}
-    .af-tab:hover {{ color:#F3F4F6; background:rgba(255,255,255,0.05); }}
-    .af-tab.active {{ background:rgba(16,185,129,0.16); color:#10B981; border-color:rgba(16,185,129,0.35); font-weight:600; }}
-    .af-body {{ padding:24px; }}
-    .af-badge-amber {{ display:inline-block; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:600; background:rgba(245,158,11,0.15); color:#FBBF24; border:1px solid rgba(245,158,11,0.35); }}
-    .af-badge-sky {{ display:inline-block; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:600; background:rgba(56,189,248,0.15); color:#38BDF8; border:1px solid rgba(56,189,248,0.35); }}
-    .af-badge-green {{ display:inline-block; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:600; background:rgba(16,185,129,0.15); color:#34D399; border:1px solid rgba(16,185,129,0.35); }}
-    .af-card {{ background:#111614; border:1px solid #222C28; border-radius:12px; padding:18px; transition:all .18s; }}
-    .af-card:hover {{ border-color:rgba(16,185,129,0.5); transform:translateY(-2px); }}
-    .af-grid-3 {{ display:grid; grid-template-columns:repeat(auto-fit, minmax(270px, 1fr)); gap:16px; }}
-    .af-pill {{ padding:6px 14px; border-radius:999px; font-size:12px; font-weight:500; cursor:pointer; border:1px solid #222C28; background:#171E1B; color:#D1D5DB; transition:all .15s; }}
-    .af-pill.active {{ background:#10B981; color:#052E16; border-color:#34D399; font-weight:700; }}
-    .af-modal-backdrop {{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.78); z-index:9999; align-items:center; justify-content:center; padding:16px; }}
-    .af-modal {{ background:#111614; border:1px solid #2A3631; border-radius:16px; max-width:560px; width:100%; padding:22px; color:#F3F4F6; position:relative; max-height:92vh; overflow-y:auto; }}
-    .af-bar-bg {{ height:7px; background:#0A0D0C; border-radius:999px; overflow:hidden; border:1px solid #1F2925; margin-top:4px; }}
-    .af-bar-fill {{ height:100%; border-radius:999px; }}
-    .af-tooltip {{ position:relative; }}
-    .af-tooltip:hover .af-tip-box {{ opacity:1; transform:translateY(0); }}
-    .af-tip-box {{ opacity:0; transform:translateY(4px); transition:all .15s; pointer-events:none; position:absolute; bottom:105%; left:50%; transform:translateX(-50%); background:#0A0D0C; border:1px solid #2F3E38; padding:6px 10px; border-radius:8px; font-size:11px; white-space:nowrap; z-index:20; box-shadow:0 8px 20px rgba(0,0,0,0.6); }}
+    #astrofarming-root * { box-sizing: border-box; }
+    .af-header { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; padding:14px 24px; background:#0E1311; border-bottom:1px solid #222C28; gap:12px; }
+    .af-brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; color:#FFFFFF; }
+    .af-logo { width:30px; height:30px; border-radius:8px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.45); display:flex; align-items:center; justify-content:center; color:#10B981; font-size:15px; }
+    .af-nav { display:flex; gap:6px; flex-wrap:wrap; }
+    .af-tab { padding:7px 14px; border-radius:8px; font-size:13px; font-weight:500; cursor:pointer; border:1px solid transparent; background:transparent; color:#9CA3AF; transition:all .15s; }
+    .af-tab:hover { color:#F3F4F6; background:rgba(255,255,255,0.05); }
+    .af-tab.active { background:rgba(16,185,129,0.16); color:#10B981; border-color:rgba(16,185,129,0.35); font-weight:600; }
+    .af-body { padding:24px; }
+    .af-badge-amber { display:inline-block; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:600; background:rgba(245,158,11,0.15); color:#FBBF24; border:1px solid rgba(245,158,11,0.35); }
+    .af-badge-sky { display:inline-block; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:600; background:rgba(56,189,248,0.15); color:#38BDF8; border:1px solid rgba(56,189,248,0.35); }
+    .af-badge-green { display:inline-block; padding:3px 10px; border-radius:999px; font-size:11px; font-weight:600; background:rgba(16,185,129,0.15); color:#34D399; border:1px solid rgba(16,185,129,0.35); }
+    .af-card { background:#111614; border:1px solid #222C28; border-radius:12px; padding:18px; transition:all .18s; }
+    .af-card:hover { border-color:rgba(16,185,129,0.5); transform:translateY(-2px); }
+    .af-grid-3 { display:grid; grid-template-columns:repeat(auto-fit, minmax(270px, 1fr)); gap:16px; }
+    .af-pill { padding:6px 14px; border-radius:999px; font-size:12px; font-weight:500; cursor:pointer; border:1px solid #222C28; background:#171E1B; color:#D1D5DB; transition:all .15s; }
+    .af-pill.active { background:#10B981; color:#052E16; border-color:#34D399; font-weight:700; }
+    .af-modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.78); z-index:9999; align-items:center; justify-content:center; padding:16px; }
+    .af-modal { background:#111614; border:1px solid #2A3631; border-radius:16px; max-width:560px; width:100%; padding:22px; color:#F3F4F6; position:relative; max-height:92vh; overflow-y:auto; }
+    .af-bar-bg { height:7px; background:#0A0D0C; border-radius:999px; overflow:hidden; border:1px solid #1F2925; margin-top:4px; }
+    .af-bar-fill { height:100%; border-radius:999px; }
+    .af-tooltip { position:relative; }
+    .af-tooltip:hover .af-tip-box { opacity:1; transform:translateY(0); }
+    .af-tip-box { opacity:0; transform:translateY(4px); transition:all .15s; pointer-events:none; position:absolute; bottom:105%; left:50%; transform:translateX(-50%); background:#0A0D0C; border:1px solid #2F3E38; padding:6px 10px; border-radius:8px; font-size:11px; white-space:nowrap; z-index:20; box-shadow:0 8px 20px rgba(0,0,0,0.6); }
   </style>
 
   <!-- Header -->
@@ -286,7 +286,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#F59E0B; font-weight:700; letter-spacing:1px;">COPERNICUS LAND MONITORING SERVICE</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">1) Soil Seasonality &amp; Abundance</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">DMP 300m (0–210 Dry Matter Index)</div>
-          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/soil_dmp.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/soil_dmp.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> Evaluates 10-day dry matter productivity and soil moisture retention across Santander. Red-yellow gradients identify high drought stress and rapid mineralization on exposed alluvial soils.
           </p>
@@ -296,7 +296,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#38BDF8; font-weight:700; letter-spacing:1px;">ESA COPERNICUS SENTINEL-1 IW</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">2) Oil Palm Structural Mapping</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">C-Band SAR RGB Ratio (Backscatter)</div>
-          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/oil_palm.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/oil_palm.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> Utilizes all-weather C-band synthetic aperture radar (SAR) backscatter ratios (VV/VH). Distinct textural signatures separate perennial oil palm and rubber plantations from low-stature citrus blocks.
           </p>
@@ -306,7 +306,7 @@ astrofarming_ui = f"""
           <div style="font-size:10px; color:#10B981; font-weight:700; letter-spacing:1px;">ESA COPERNICUS SENTINEL-2 L2A</div>
           <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-top:2px;">3) Vegetation Index (NDVI)</div>
           <div style="font-size:12px; color:#9CA3AF; margin-bottom:10px;">Optical Chlorophyll Vigor (B8/B4)</div>
-          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/ndvi.jpg.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
+          <img src="https://raw.githubusercontent.com/mcuevas6/Astrofarming/main/assets/ndvi.jpeg" style="width:100%; height:165px; object-fit:cover; border-radius:8px; border:1px solid #222C28;" />
           <p style="font-size:12px; color:#9CA3AF; margin:10px 0 0 0;">
             <strong>Scientific Analysis:</strong> High-resolution multispectral optical imagery measuring near-infrared reflectance. Dark green pixels indicate dense photosynthetic canopies and robust chlorophyll absorption in the Magdalena river basin.
           </p>
@@ -418,10 +418,135 @@ astrofarming_ui = f"""
   </div>
 
   <script>
-    const AF_DATA = {records_json};
+    const AF_DATA = __RECORDS_JSON__;
     let afSeason = 'All';
     let afPriority = 'All';
 
-    function afSwitchTab(t) {{
-      ['home','advisor','analytics'].forEach(k => {{
-        document.getElementById('af-view-'+k).style.display = (k===t) ? 'block' : 'none
+    function afSwitchTab(t) {
+      ['home','advisor','analytics'].forEach(k => {
+        document.getElementById('af-view-'+k).style.display = (k===t) ? 'block' : 'none';
+        document.getElementById('tab-'+k).className = (k===t) ? 'af-tab active' : 'af-tab';
+      });
+      if(t==='advisor') afRenderAdvisor();
+      if(t==='analytics') afRenderAnalytics();
+    }
+
+    function afSetTelemetry(season) {
+      const d = AF_DATA.find(x => x.Climate_Season === season);
+      if(!d) return;
+      document.getElementById('af-home-season').textContent = d.Climate_Season;
+      document.getElementById('af-home-diag').textContent = d.NASA_POWER_Diagnostic;
+      document.getElementById('af-t-rain').textContent = '💧 ' + d.Precipitation_PRECTOTCORR_mm_month + ' mm/mo';
+      document.getElementById('af-t-wet').textContent = '🌱 ' + d.Soil_Wetness_GWETTOP_pct.toFixed(1) + '%';
+      document.getElementById('af-t-temp').textContent = '🌡️ ' + d.Air_Temp_T2M_C.toFixed(1) + ' °C';
+      document.getElementById('af-t-solar').textContent = '☀️ ' + d.Solar_Irradiance_MJ_m2_day.toFixed(1) + ' MJ/m²/d';
+      ['hbtn-dry','hbtn-wet','hbtn-trans'].forEach(id => document.getElementById(id).classList.remove('active'));
+      const act = season.startsWith('Dry') ? 'hbtn-dry' : season.startsWith('Wet') ? 'hbtn-wet' : 'hbtn-trans';
+      document.getElementById(act).classList.add('active');
+    }
+
+    function afBadgeClass(shortSeason) {
+      if(shortSeason==='Dry Season') return 'af-badge-amber';
+      if(shortSeason==='Wet Season') return 'af-badge-sky';
+      return 'af-badge-green';
+    }
+
+    function afRenderAdvisor() {
+      const seasons = ['All','Dry Season','Wet Season','Transition Season'];
+      const priorities = ['All','Maximize short-term yield','Restore soil nutrients','Save water (Drought protection)','Prevent erosion and runoff'];
+      document.getElementById('af-season-pills').innerHTML = seasons.map(s => `<button class="af-pill ${afSeason===s?'active':''}" onclick="afSeason='${s}';afRenderAdvisor()">${s}</button>`).join('');
+      document.getElementById('af-priority-pills').innerHTML = priorities.map(p => `<button class="af-pill ${afPriority===p?'active':''}" onclick="afPriority='${p}';afRenderAdvisor()">${p}</button>`).join('');
+
+      const list = AF_DATA.filter(x => (afSeason==='All'||x.Short_Season===afSeason) && (afPriority==='All'||x.Farmer_Priority===afPriority));
+      document.getElementById('af-cards-container').innerHTML = list.map(x => `
+        <div class="af-card" style="cursor:pointer; display:flex; flex-direction:column; justify-content:space-between;" onclick="afOpenModal(${x.id})">
+          <div>
+            <span class="${afBadgeClass(x.Short_Season)}">${x.Climate_Season}</span>
+            <h4 style="font-size:17px; font-weight:700; color:#FFFFFF; margin:10px 0 8px 0;">${x.Rotation_Strategy}</h4>
+            <div style="font-size:10px; color:#6B7280; font-weight:700;">CROP SEQUENCE</div>
+            <div style="font-size:13px; color:#E5E7EB; font-weight:500; margin-top:2px;">${x.Crop_Sequence}</div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px; padding-top:12px; border-top:1px solid #222C28;">
+            <div><div style="font-size:10px; color:#6B7280;">SOIL WET.</div><div style="font-size:13px; font-weight:700;">${x.Soil_Wetness_GWETTOP_pct}%</div></div>
+            <div><div style="font-size:10px; color:#6B7280;">PRECIP.</div><div style="font-size:13px; font-weight:700;">${x.Precipitation_PRECTOTCORR_mm_month} mm</div></div>
+            <div><div style="font-size:10px; color:#6B7280;">AIR TEMP</div><div style="font-size:13px; font-weight:700;">${x.Air_Temp_T2M_C} °C</div></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding-top:10px; border-top:1px solid #222C28; font-size:12px;">
+            <span style="color:#9CA3AF;">${x.Farmer_Priority}</span>
+            <span style="color:#10B981; font-weight:700;">Details &gt;</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function afOpenModal(id) {
+      const x = AF_DATA.find(d => d.id === id); if(!x) return;
+      const sb = document.getElementById('m-season'); sb.textContent = x.Climate_Season; sb.className = afBadgeClass(x.Short_Season);
+      document.getElementById('m-priority').textContent = x.Farmer_Priority;
+      document.getElementById('m-strategy').textContent = x.Rotation_Strategy;
+      document.getElementById('m-crops').textContent = x.Crop_Sequence;
+      document.getElementById('m-rec').textContent = x.Actionable_Recommendation;
+      document.getElementById('m-soil').textContent = x.Dominant_Soil_Type;
+      document.getElementById('m-solar').textContent = x.Solar_Irradiance_MJ_m2_day + ' MJ/m²/day';
+      document.getElementById('m-w-val').textContent = x.Water_Consumption_m3_ha + ' m³/ha';
+      document.getElementById('m-w-bar').style.width = Math.round(x.Water_Consumption_m3_ha/5200*100) + '%';
+      document.getElementById('m-n-val').textContent = x.Nitrogen_Input_kg_ha + ' kg/ha';
+      document.getElementById('m-n-bar').style.width = Math.round(x.Nitrogen_Input_kg_ha/78*100) + '%';
+      document.getElementById('m-y-val').textContent = x.Yield_Index_0_100 + ' / 100';
+      document.getElementById('m-y-bar').style.width = x.Yield_Index_0_100 + '%';
+      document.getElementById('m-h-val').textContent = x.Soil_Health_Score_0_100 + ' / 100';
+      const hb = document.getElementById('m-h-bar'); hb.style.width = x.Soil_Health_Score_0_100 + '%'; hb.style.background = x.Soil_Health_Score_0_100>=70?'#10B981':'#F59E0B';
+
+      document.getElementById('g-y-arc').setAttribute('stroke-dasharray', `${x.Yield_Index_0_100}, 100`);
+      document.getElementById('g-y-pct').textContent = x.Yield_Index_0_100 + '%';
+      document.getElementById('g-y-sub').textContent = x.Yield_Index_0_100 + ' of 100';
+      const ha = document.getElementById('g-h-arc'); ha.setAttribute('stroke-dasharray', `${x.Soil_Health_Score_0_100}, 100`); ha.setAttribute('stroke', x.Soil_Health_Score_0_100>=70?'#10B981':'#F59E0B');
+      document.getElementById('g-h-pct').textContent = x.Soil_Health_Score_0_100 + '%';
+      document.getElementById('g-h-sub').textContent = x.Soil_Health_Score_0_100 + ' of 100';
+      document.getElementById('af-modal-bg').style.display = 'flex';
+    }
+
+    function afCloseModal() { document.getElementById('af-modal-bg').style.display = 'none'; }
+
+    function afMakeBars(items, maxVal, color, unit) {
+      return `<div style="display:flex; align-items:flex-end; justify-content:space-around; height:190px; padding-top:24px; border-bottom:1px solid #2A3631;">` +
+        items.map(it => {
+          const h = Math.round((it.val / maxVal) * 145);
+          const disp = unit==='m³/ha' ? Math.round(it.val).toLocaleString() : it.val.toFixed(1);
+          return `<div class="af-tooltip" style="display:flex; flex-direction:column; align-items:center; width:74px;">
+            <div class="af-tip-box"><strong style="color:#FFF;">${it.full}</strong><br><span style="color:${color};">● ${disp} ${unit}</span></div>
+            <div style="font-size:11px; font-weight:700; color:#E5E7EB; margin-bottom:4px;">${disp}</div>
+            <div style="width:42px; height:${h}px; background:${color}; border-radius:6px 6px 0 0;"></div>
+            <div style="font-size:10px; color:#9CA3AF; margin-top:6px; text-align:center;">${it.short}</div>
+          </div>`;
+        }).join('') + `</div>`;
+    }
+
+    function afRenderAnalytics() {
+      const strats = [
+        { full:'1. Traditional (Baseline)', short:'Traditional (B...' },
+        { full:'2. Soil Health (Legumes)', short:'Soil Health (L...' },
+        { full:'3. Water Resilience (Cover Crops)', short:'Water Resilien...' }
+      ];
+      const stats = strats.map(s => {
+        const sub = AF_DATA.filter(d => d.Rotation_Strategy === s.full);
+        return {
+          full: s.full, short: s.short,
+          y: sub.reduce((a,b)=>a+b.Yield_Index_0_100,0)/sub.length,
+          h: sub.reduce((a,b)=>a+b.Soil_Health_Score_0_100,0)/sub.length,
+          w: sub.reduce((a,b)=>a+b.Water_Consumption_m3_ha,0)/sub.length
+        };
+      });
+      document.getElementById('af-chart-yield').innerHTML = afMakeBars(stats.map(s=>({full:s.full,short:s.short,val:s.y})), 100, '#10B981', 'pts');
+      document.getElementById('af-chart-soil').innerHTML  = afMakeBars(stats.map(s=>({full:s.full,short:s.short,val:s.h})), 100, '#10B981', 'pts');
+      document.getElementById('af-chart-water').innerHTML = afMakeBars(stats.map(s=>({full:s.full,short:s.short,val:s.w})), 6000, '#38BDF8', 'm³/ha');
+    }
+  </script>
+</div>
+"""
+
+# Reemplazamos la marca con el JSON real sin romper los corchetes de Python
+astrofarming_ui = astrofarming_ui.replace("__RECORDS_JSON__", records_json)
+
+# Renderizar en Streamlit utilizando componentes HTML
+st.components.v1.html(astrofarming_ui, height=950, scrolling=True)
