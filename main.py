@@ -553,3 +553,17 @@ astrofarming_ui = f"""
       `).join('');
 
       document.getElementById('af-chart-water').innerHTML = agg.map(item => `
+        <div style="margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;">
+            <span style="color:#D1D5DB; font-weight:500;">${{item.strat}}</span>
+            <span style="color:#38BDF8; font-weight:700;">${{item.avgWater.toFixed(0)}} m³/ha</span>
+          </div>
+          <div class="af-bar-bg"><div class="af-bar-fill" style="width:${{Math.min(100, (item.avgWater/6000)*100)}}%; background:#38BDF8;"></div></div>
+        </div>
+      `).join('');
+    }}
+  </script>
+</div>
+"""
+
+st.components.v1.html(astrofarming_ui, height=920, scrolling=True)
